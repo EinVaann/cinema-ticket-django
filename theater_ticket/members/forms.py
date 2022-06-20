@@ -1,7 +1,7 @@
 
 from django import forms
 from django.forms import ModelForm,ModelChoiceField
-from .models import  Movie, Show
+from .models import  Cinema_Hall, Movie, Show
 
 
 class MovieForm(ModelForm):
@@ -23,22 +23,28 @@ class MovieForm(ModelForm):
             'genre' : forms.TextInput(attrs={'class':'form-control','placeholder':'Genre'}),
         }
 
-class ShowForm(ModelChoiceField):
+class CinemaHallField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.name
+
+class MovieField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.title
+
+class ShowForm(ModelForm):
+    cinema_hall_id = CinemaHallField(Cinema_Hall.objects)
+    movie_id = MovieField(Movie.objects)
     class Meta:
-        model : Show
-        field = ('date','start_time','end_time','cinema_hall_id','movie_id')
+        model = Show
+        fields = ('date','start_time','end_time','cinema_hall_id','movie_id')
 
         labels = {
             'date' : '',
             'start_time' : '',
             'end_time' : '',
-            'cinema_hall_id' : '',
-            'movie_id' : '',
         }
         widgets = {
-            'date' : forms.DateInput(attrs={'class':'form-control', 'placeholder':'Date'}),
-            'start_time' : forms.DateTimeInput(attrs={'class':'form-control','placeholder':'Start time'}),
-            'end_time' : forms.DateTimeInput(attrs={'class':'form-control','placeholder':'End time'}),
-            'cinema_hall_id' : forms.NumberInput(attrs={'class':'form-control','placeholder':'Cinema hall id'}),
-            'movie_id' : forms.NumberInput(attrs={'class':'form-control','placeholder':'Movie id'}),
+            'date' : forms.DateInput(),
+            'start_time' : forms.DateTimeInput(),
+            'end_time' : forms.DateTimeInput(),
         }

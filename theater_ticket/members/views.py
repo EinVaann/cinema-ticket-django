@@ -13,6 +13,7 @@ def home_page(request):
 
 def admin_page(request):
     return render(request,'ui/admin.html',{})
+    
 def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -92,6 +93,7 @@ def delete_seats(request):
     seats = Cinema_Seat.objects.all()
     seats.delete()
     return redirect('/')
+
 def add_movie(request):
     submitted = False
     if request.method == "POST":
@@ -104,7 +106,6 @@ def add_movie(request):
         if 'submitted' in request.GET:
             submitted=True
     return render(request, 'ui/add_movie.html', {'form': form , 'submitted':submitted})
-
 
 def add_show(request):
     submitted = False
