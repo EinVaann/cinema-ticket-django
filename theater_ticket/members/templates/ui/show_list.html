@@ -1,0 +1,56 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+{% if form.errors %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-th="Close"></button>
+  </div>
+{% endif %}	
+{% if user.is_superuser %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+	<h1>Show list</h1>
+    <br/>
+        <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_show' %}">Add</a></button>
+    <br/>    
+<br/>
+<div class="container">
+  <div class="row">
+    <table>
+    <tr>
+        <td>Date</td>
+        <td>Start time</td>
+        <td>End time</td>
+        <td>Cinema hall id</td>
+        <td>Movie id</td>
+    </tr>
+      {% for show in show_list %}
+    <tr>
+        <th>
+          {{show.date}} 
+        </th>
+        <th>
+            {{show.start_time}} 
+        </th>
+        <th>
+            {{show.end_time}}  
+        </th>
+        <th>
+            {{show.cinema_hall_id}} 
+        </th>
+        <th>
+            {{show.movie_id}} 
+        </th>
+        <th><button>Edit</button></th>
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br/><br/>
+{%else%}
+<center>
+    <h1>Sorry you don't have permission to access this page</h1>
+    </center>
+{% endif %}	
+{% endblock %}
