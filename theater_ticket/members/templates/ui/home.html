@@ -13,22 +13,28 @@
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-img">
-                                <img src="/image/{{movies.0.image}}" class="img-fluid">
-                                {{ movies.pop.0 }}
+                                <a href="{% url 'movie_info' movies.0.id %}">
+                                <img src="/image/{{movies.0.image}}" width="300" height="500" class="img-fluid">
+                                </a>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
                 {% for movie in movies %}
+                {% if movie.id != movies.0.id %}
                 <div class="carousel-item">
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-img">
-                                <img src="/image/{{movie.image}}" class="img-fluid">
+                                <a href="{% url 'movie_info' movie.id %}">
+                                <img src="/image/{{movie.image}}" width="300" height="40" class="img-fluid">
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
            
         </div>
