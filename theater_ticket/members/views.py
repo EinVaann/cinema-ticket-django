@@ -12,6 +12,8 @@ from django.http import HttpResponseRedirect
 def home_page(request):
     return render(request, 'ui/home.html', {})
 
+def admin_page(request):
+    return render(request,'ui/admin.html',{})
 def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
