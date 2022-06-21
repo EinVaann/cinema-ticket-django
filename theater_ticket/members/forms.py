@@ -53,8 +53,8 @@ class ShowForm(ModelForm):
         }
         widgets = {
             'date' : forms.DateInput(attrs={'class':'form-control', 'placeholder':'Date'}),
-            # 'start_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'Start Time'}),
-            # 'end_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'End Time'}),
+            'start_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'Start Time'}),
+            'end_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'End Time'}),
         }
         
 class BookingForm(ModelForm):

@@ -156,11 +156,13 @@ def add_show(request):
 
 def edit_show(request, show_id):
     show = Show.objects.get(pk =  show_id)
+    movies = Movie.objects.all()
+    movies_dur = [m.duration for m in movies]
     form = ShowForm(request.POST or None, instance = show)
     if form.is_valid():
         form.save()
         return HttpResponseRedirect('/show_list')
-    return render(request, 'ui/edit_show.html', {'form': form, 'show':show })
+    return render(request, 'ui/edit_show.html', {'form1': form, 'show':show, 'movies':movies_dur })
     
 def add_cinema(request):
     submitted = False
