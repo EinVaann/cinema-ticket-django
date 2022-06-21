@@ -12,13 +12,13 @@
     <br/> 
     {% if user.is_superuser %}
         <a href="{% url 'add_movie' %}" class="btn btn-primary btn-lg" role="button">Add</a>
-        <form method = POST action ={% url 'search_movie' %}>
-          {% csrf_token %}
-          <input class = "form-control me-2"
-          type="search" placeholder="Search" aria-label="Search" name="searched">
-          <button class="btn btn-outline-secondary" type ="submit">Search</button>
-      </form>
     {% endif %}
+    <form method = POST action ={% url 'search_movie' %}>
+      {% csrf_token %}
+      <input class = "form-control me-2"
+      type="search" placeholder="Search" aria-label="Search" name="searched">
+      <button class="btn btn-outline-secondary" type ="submit">Search</button>
+  </form>
    
 <br>
 <br/>

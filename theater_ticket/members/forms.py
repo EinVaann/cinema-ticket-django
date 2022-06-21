@@ -100,3 +100,16 @@ class CinemaForm(ModelForm):
         widgets = {
             'name' : forms.TextInput(attrs={ 'placeholder':'Name'}),
         }
+
+class CinemaHallForm(ModelForm):
+    class Meta:
+        model = Cinema_Hall
+        fields = "__all__"
+        labels = {
+            'name' : '',
+            'total_seats':''
+        }
+        widgets = {
+            'name' : forms.TextInput(attrs={ 'placeholder':'Name'}),
+            'total_seats':forms.NumberInput(attrs={ 'placeholder':'Number of seats'}),
+        }

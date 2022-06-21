@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
-from .forms import CinemaForm, MovieForm, ShowForm , BookingForm ,Show_SeatForm
+from .forms import CinemaForm, CinemaHallForm, MovieForm, ShowForm , BookingForm ,Show_SeatForm
 from django.http import HttpResponseRedirect
 
 def home_page(request):
@@ -190,6 +190,44 @@ def add_cinema(request):
             submitted=True
     return render(request, 'ui/add_cinema.html', {'form': form , 'submitted':submitted})
 
+def add_cinema_hall(request):
+    submitted = False
+    if request.method == "POST":
+        author = Cinema_Hall(total_seats = 48)
+        form = CinemaHallForm(request.POST,instance=author)
+        if form.is_valid():
+            form.save()
+            for cinema in Cinema.objects.all():
+                cinema.total_cinema_halls = len(Cinema_Hall.objects.filter(cinema_id=cinema.id))
+                cinema.save()
+            
+            for cinema_hall in Cinema_Hall.objects.all():
+                if len(Cinema_Seat.objects.filter(cinema_hall_id=cinema_hall.id))==0:
+                    c = 'ABCDEF'
+                    n = {1,2,3,4,5,6,7,8}
+                    for cc in c:
+                        for nn in n:
+                            seat_name = cc + str(nn)
+                            seat = Cinema_Seat(seat_name=seat_name, cinema_hall_id=cinema_hall)
+                            seat.save()
+            return HttpResponseRedirect('/add_cinema_hall?submitted=True')
+    else:
+        form = CinemaHallForm
+        if 'submitted' in request.GET:
+            submitted=True
+    return render(request, 'ui/add_cinema_hall.html', {'form': form , 'submitted':submitted})
+
+def edit_cinema_hall(request, cinema_hall_id):
+    cinema_hall = Cinema_Hall.objects.get(pk = cinema_hall_id)
+    form = CinemaHallForm(request.POST or None, instance = cinema_hall)
+    if form.is_valid():
+        form.save()
+        for cinema in Cinema.objects.all():
+                cinema.total_cinema_halls = len(Cinema_Hall.objects.filter(cinema_id=cinema.id))
+                cinema.save()
+        return HttpResponseRedirect('/cinema_list')
+    return render(request, 'ui/edit_cinema_hall.html', {'form': form, 'cinema_hall': cinema_hall })
+
 def edit_cinema(request, cinema_id):
     cinema = Cinema.objects.get(pk = cinema_id)
     form = CinemaForm(request.POST or None, instance = cinema)
@@ -200,6 +238,13 @@ def edit_cinema(request, cinema_id):
 
 def delete_cinema(request, cinema_id):
     cinema = Cinema.objects.get(pk =  cinema_id).delete()
+    return HttpResponseRedirect('/cinema_list')
+
+def delete_cinema_hall(request, cinema_hall_id):
+    cinema_hall = Cinema_Hall.objects.get(pk =  cinema_hall_id).delete()
+    for cinema in Cinema.objects.all():
+                cinema.total_cinema_halls = len(Cinema_Hall.objects.filter(cinema_id=cinema.id))
+                cinema.save()
     return HttpResponseRedirect('/cinema_list')
 
 def add_booking(request):

@@ -1,0 +1,24 @@
+{% extends 'ui/base.html' %}
+{% block  content %}
+{% if user.is_superuser %}
+    <center>
+        <h1> Add cinema Hall </h1>
+        <br/><br/>
+        {% if submitted %}
+            Add cinema Hall was succefully!!
+        {%else%}
+
+        <form action="" method=POST>
+             {% csrf_token %}  
+             {{form.as_p}}  
+             <input type ="submit" value="Submit" class="btn btn-secondary">
+        </form>
+        {%endif%}
+    </center>
+
+{% else %}
+    <center>
+    <h1>Sorry you don't have permission to access this page</h1>
+    </center>
+{% endif%}
+{% endblock %}
