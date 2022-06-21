@@ -49,8 +49,8 @@ class ShowForm(ModelForm):
         }
         widgets = {
             'date' : forms.DateInput(),
-            'start_time' : forms.DateTimeInput(),
-            'end_time' : forms.DateTimeInput(),
+            'start_time' : forms.TimeInput(),
+            'end_time' : forms.TimeInput(),
         }
         
 class BookingForm(ModelForm):

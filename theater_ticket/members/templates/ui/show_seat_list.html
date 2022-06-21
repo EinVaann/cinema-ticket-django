@@ -11,7 +11,7 @@
 	<div class="shadow p-4 mb-5 bg-body rounded">
 	<h1>Show seat list</h1>
     <br/>
-        <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_show_seat' %}">Add</a></button>
+        <a href="{% url 'add_show_seat' %}" class="btn btn-primary" role="button">Add</a>
     <br/>    
 <br/>
 <div class="container">
@@ -42,10 +42,7 @@
             {{show_seat.booking_id}} 
         </th>
         <th>
-            {% if user.is_superuser %}
-            <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_show_seat' show_seat.id %}">Edit</a></button>
-            {% endif %}
-        </th>
+            <a href="{% url 'edit_show_seat' show_seat.id %}" class="btn btn-primary" role="button">Edit</a>        </th>
     </tr>
       {% endfor %}
     </table>

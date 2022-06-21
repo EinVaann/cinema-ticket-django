@@ -30,10 +30,14 @@ class Cinema_Seat(models.Model):
 
 class Show(models.Model):
     date = models.DateField()
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     cinema_hall_id = models.ForeignKey(Cinema_Hall, on_delete=models.CASCADE)
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    def __str__(self):
+        # cinema_hall = Cinema_Hall.objects.get(pk=self.cinema_hall_id)
+        # movie = Movie.objects.get(pk=self.movie_id)
+        return str(self.movie_id) +':'+str(self.start_time)+'->'+str(self.end_time)
 
 class Booking(models.Model):
     number_of_seats = models.IntegerField()
