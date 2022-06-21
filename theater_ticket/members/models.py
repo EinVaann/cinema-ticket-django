@@ -27,6 +27,8 @@ class Cinema_Hall(models.Model):
 class Cinema_Seat(models.Model):
     seat_name = models.CharField(max_length=10)
     cinema_hall_id = models.ForeignKey(Cinema_Hall, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.cinema_hall_id)+'-'+self.seat_name
 
 class Show(models.Model):
     date = models.DateField()
@@ -37,7 +39,7 @@ class Show(models.Model):
     def __str__(self):
         # cinema_hall = Cinema_Hall.objects.get(pk=self.cinema_hall_id)
         # movie = Movie.objects.get(pk=self.movie_id)
-        return str(self.movie_id) +':'+str(self.start_time)+'->'+str(self.end_time)
+        return str(self.movie_id) +':'+str(self.cinema_hall_id)
 
 class Booking(models.Model):
     number_of_seats = models.IntegerField()
@@ -45,13 +47,15 @@ class Booking(models.Model):
     status = models.IntegerField()
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     show_id = models.ForeignKey(Show, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.user_id) + '---' + str(self.show_id)
 
 class Show_Seat(models.Model):
     is_empty = models.BooleanField()
     price = models.IntegerField()
     cinema_seat_id = models.ForeignKey(Cinema_Seat, on_delete=models.CASCADE)
     show_id = models.ForeignKey(Show, on_delete=models.CASCADE)
-    booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE,null=True,blank=True)
 
 class Payment(models.Model):
     amount = models.IntegerField()
