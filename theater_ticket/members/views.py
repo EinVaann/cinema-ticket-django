@@ -134,9 +134,10 @@ def add_show(request):
     else:
         form1 = ShowForm
         movies = Movie.objects.all()
+        movies_dur = [m.duration for m in movies]
         if 'submitted' in request.GET:
             submitted=True
-    return render(request, 'ui/add_show.html', {'form1': form1 , 'submitted':submitted, 'movies':movies})
+    return render(request, 'ui/add_show.html', {'form1': form1 , 'submitted':submitted, 'movies':movies_dur})
 
 def add_booking(request):
     submitted = False

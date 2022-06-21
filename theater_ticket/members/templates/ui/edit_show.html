@@ -1,4 +1,5 @@
 {% extends 'ui/base.html' %}
+{% load static %}
 {% block  content %}
 {% if user.is_superuser %}
     <center> 
@@ -7,9 +8,13 @@
        
          <br/><br/>
         <form action="" method=POST>
-             {% csrf_token %}  
-               {{form.as_p}} 
-             <input type ="submit" value="Submit" class="btn btn-secondary">
+            {% csrf_token %}  
+            {{form1.date}}<br>
+            {{form1.start_time}}<br>
+            {{form1.end_time}}<br>
+            {{form1.movie_id.label_tag}}{{form1.movie_id}}<br><br>
+            {{form1.cinema_hall_id.label_tag}}{{form1.cinema_hall_id}}<br><br>
+            <input type ="submit" value="Submit" class="btn btn-secondary">
         </form>
     </center> 
 {% else %}
@@ -17,4 +22,6 @@
     <h1>Sorry you don't have permission to access this page</h1>
     </center>
 {% endif%}
+<div id="data_from_django" hidden>{{ movies }}</div> 
+<script src="{% static 'js/ae_show.js' %}"></script>
 {% endblock %}
