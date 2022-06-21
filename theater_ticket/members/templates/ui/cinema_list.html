@@ -9,6 +9,10 @@
 {% endif %}	
 	<div class="shadow p-4 mb-5 bg-body rounded">
 	<h1>Cinema List</h1>
+  <br/>
+  {% if user.is_superuser %}
+  <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_cinema' %}">Add</a></button>
+  {% endif %}
 
 <br/>
         <div class="list-group">
@@ -19,7 +23,9 @@
               </label>
               <!-- <a href="" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Control</a> -->
             </a>
-          
+            {% if user.is_superuser %}
+            <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_movie' %}">Edit</a></button>
+            {% endif %}
             {% endfor %}
         </div>
 		

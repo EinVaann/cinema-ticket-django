@@ -7,20 +7,24 @@ class Movie(models.Model):
     duration = models.IntegerField()
     released_date = models.DateField()
     genre = models.CharField(max_length=256)
-
+    def __str__(seft):
+        return seft.title
 class Cinema(models.Model):
     name = models.CharField(max_length=256)
     total_cinema_halls = models.IntegerField()
-
+    def __str__(seft):
+        return seft.name
 class Cinema_Hall(models.Model):
     name = models.CharField(max_length=64)
     total_seats = models.IntegerField()
     cinema_id = models.ForeignKey(Cinema, on_delete=models.CASCADE)
-
+    def __str__(seft):
+        return seft.name
 class Cinema_Seat(models.Model):
     seat_name = models.CharField(max_length=10)
     cinema_hall_id = models.ForeignKey(Cinema_Hall, on_delete=models.CASCADE)
-
+    def __str__(seft):
+        return seft.seat_name
 class Show(models.Model):
     date = models.DateField()
     start_time = models.DateTimeField()

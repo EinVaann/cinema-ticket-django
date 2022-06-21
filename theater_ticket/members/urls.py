@@ -13,6 +13,11 @@ urlpatterns = [
     # path('create_seats', views.create_seats),
     # path('delete_seats', views.delete_seats),
     path('add_movie',views.add_movie, name='add_movie'),
+    path('edit_movie/<movie_id>',views.edit_movie, name='edit_movie'),
+
+    path('add_cinema',views.add_cinema, name='add_cinema'),
+    
     path('admin_page',views.admin_page, name='admin_page'),
-    path('add_show',views.add_show, name='add_show')
+    path('add_show',views.add_show, name='add_show'),
+    path('edit_show/<show_id>',views.edit_show, name='edit_show')
 ]

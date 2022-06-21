@@ -1,7 +1,7 @@
 
 from django import forms
 from django.forms import ModelForm,ModelChoiceField
-from .models import  Cinema_Hall, Movie, Show
+from .models import  Cinema, Cinema_Hall, Movie, Show
 
 
 class MovieForm(ModelForm):
@@ -29,15 +29,12 @@ class CinemaHallField(forms.ModelChoiceField):
 
 class MovieField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
-        return obj.title
+        return obj
 
 class ShowForm(ModelForm):
-    cinema_hall_id = CinemaHallField(Cinema_Hall.objects)
-    movie_id = MovieField(Movie.objects)
     class Meta:
         model = Show
         fields = ('date','start_time','end_time','cinema_hall_id','movie_id')
-
         labels = {
             'date' : '',
             'start_time' : '',
@@ -47,4 +44,16 @@ class ShowForm(ModelForm):
             'date' : forms.DateInput(),
             'start_time' : forms.DateTimeInput(),
             'end_time' : forms.DateTimeInput(),
+        }
+
+class CinemaForm(ModelForm):
+    total_cinema_halls = 0
+    class Meta:
+        model = Cinema
+        fields =  ('name',)
+        labels = {
+            'name' : ''
+        }
+        widgets = {
+            'name' : forms.TextInput(attrs={ 'placeholder':'Name'}),
         }
