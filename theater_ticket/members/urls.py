@@ -24,6 +24,7 @@ urlpatterns = [
     path('edit_booking/<booking_id>',views.edit_booking, name='edit_booking'),
     path('edit_show_seat/<show_seat_id>',views.edit_show_seat, name='edit_show_seat'),
     path('edit_payment/<payment_id>',views.edit_payment, name='edit_payment'),
+    path('movie_info/<str:pk>/', views.get_movie_info, name='movie_info'),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

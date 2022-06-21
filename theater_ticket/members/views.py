@@ -1,3 +1,4 @@
+import datetime
 from os import device_encoding
 from tkinter import N 
 from django.shortcuts import render, redirect
@@ -203,3 +204,21 @@ def edit_payment(request, payment_id):
         form.save()
         return HttpResponseRedirect('/payment_list')
     return render(request, 'ui/edit_payment.html', {'form': form, 'show':payment})
+
+
+def get_movie_info(request, pk):
+    # print("?")
+    movie = Movie.objects.get(pk=pk)
+    cinema_list = Cinema.objects.all()
+    show_lists = {}
+    for cinema in cinema_list:
+        show_lists[cinema.name] = []
+        cinema_hall_list = Cinema_Hall.objects.filter(cinema_id=cinema.id)
+        for cinema_hall in cinema_hall_list:
+            shows = Show.objects.filter(cinema_hall_id=cinema_hall.id,movie_id=movie.id,date__gte=datetime.date.today())
+            for s in shows:
+                show_lists[cinema.name].append(s)
+    print(show_lists)
+
+    return render(request, 'ui/movie_info.html', {'movie':movie, 'shows':show_lists})
+    # return redirect('/')

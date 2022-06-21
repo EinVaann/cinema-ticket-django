@@ -37,8 +37,6 @@ class Show(models.Model):
     cinema_hall_id = models.ForeignKey(Cinema_Hall, on_delete=models.CASCADE)
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     def __str__(self):
-        # cinema_hall = Cinema_Hall.objects.get(pk=self.cinema_hall_id)
-        # movie = Movie.objects.get(pk=self.movie_id)
         return str(self.movie_id) +':'+str(self.cinema_hall_id)
 
 class Booking(models.Model):
