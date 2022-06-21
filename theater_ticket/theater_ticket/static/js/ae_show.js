@@ -6,7 +6,7 @@ movies.addEventListener("change", function() {
     var data_from_django = document.getElementById("data_from_django").innerHTML; 
     data_from_django = data_from_django.slice(1, -1); 
     const words = data_from_django.split(',');
-    const dur = parseInt(words[movies.selectedIndex])
+    const dur = parseInt(words[movies.selectedIndex-1])
     var t = input.split(':')
     var h = parseInt(t[0])
     var m = parseInt(t[1])
