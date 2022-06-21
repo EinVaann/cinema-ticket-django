@@ -12,8 +12,6 @@ from django.http import HttpResponseRedirect
 def home_page(request):
     return render(request, 'ui/home.html', {})
 
-def admin_page(request):
-    return render(request,'ui/admin.html',{})
 def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -110,6 +108,7 @@ def delete_seats(request):
     seats = Cinema_Seat.objects.all()
     seats.delete()
     return redirect('/')
+
 def add_movie(request):
     submitted = False
     if request.method == "POST":
@@ -223,4 +222,3 @@ def get_movie_info(request, pk):
     print(show_lists)
 
     return render(request, 'ui/movie_info.html', {'movie':movie, 'shows':show_lists})
-    # return redirect('/')
