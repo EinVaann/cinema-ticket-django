@@ -1,7 +1,7 @@
 from email.policy import default
 from django import forms
 from django.forms import ModelForm,ModelChoiceField
-from .models import  Cinema_Hall, Movie, Show, Booking, Show_Seat, Payment
+from .models import  Cinema, Cinema_Hall, Movie, Show, Booking, Show_Seat, Payment
 
 
 class MovieForm(ModelForm):
@@ -53,8 +53,8 @@ class ShowForm(ModelForm):
         }
         widgets = {
             'date' : forms.DateInput(attrs={'class':'form-control', 'placeholder':'Date'}),
-            'start_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'Start Time'}),
-            'end_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'End Time'}),
+            # 'start_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'Start Time'}),
+            # 'end_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'End Time'}),
         }
         
 class BookingForm(ModelForm):
@@ -105,4 +105,15 @@ class PaymentForm(ModelForm):
             'amount' : forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Amount'}),
             'timestamp' : forms.DateTimeInput(attrs={'class':'form-control', 'placeholder':'Timestamp'}),
             'payment_method' : forms.TextInput(attrs={'class':'form-control', 'placeholder':'Payment Method'}),
+        }
+
+class CinemaForm(ModelForm):
+    class Meta:
+        model = Cinema
+        fields =  ('name',)
+        labels = {
+            'name' : ''
+        }
+        widgets = {
+            'name' : forms.TextInput(attrs={ 'placeholder':'Name'}),
         }

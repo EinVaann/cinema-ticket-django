@@ -40,9 +40,10 @@
                       Info
                   </a>
                   {% if user.is_superuser %}
-                  <a href="#" class="btn btn-outline-primary btn-sm">
-                    Edit
-                    </a>
+                    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_movie' movie.id %}">
+                        Edit
+                        </a>
+                    </button>
                   {% endif %}
               </div>
           </div>

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
-from .forms import MovieForm, ShowForm , BookingForm ,Show_SeatForm, PaymentForm
+from .forms import CinemaForm, MovieForm, ShowForm , BookingForm ,Show_SeatForm, PaymentForm
 from django.http import HttpResponseRedirect
 
 def home_page(request):
@@ -123,6 +123,20 @@ def add_movie(request):
         if 'submitted' in request.GET:
             submitted=True
     return render(request, 'ui/add_movie.html', {'form': form , 'submitted':submitted})
+def edit_movie(request, movie_id):
+    movie = Movie.objects.get(pk =  movie_id)
+    form = MovieForm(request.POST or None, instance = movie)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/movie_list')
+    return render(request, 'ui/edit_movie.html', {'form': form, 'movie':movie })
+def edit_movie(request, movie_id):
+    movie = Movie.objects.get(pk =  movie_id)
+    form = MovieForm(request.POST or None, instance = movie)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/movie_list')
+    return render(request, 'ui/edit_movie.html', {'form': form, 'movie':movie })
 
 
 def add_show(request):
@@ -140,6 +154,35 @@ def add_show(request):
             submitted=True
     return render(request, 'ui/add_show.html', {'form1': form1 , 'submitted':submitted, 'movies':movies_dur})
 
+def edit_show(request, show_id):
+    show = Show.objects.get(pk =  show_id)
+    form = ShowForm(request.POST or None, instance = show)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/show_list')
+    return render(request, 'ui/edit_show.html', {'form': form, 'show':show })
+    
+def add_cinema(request):
+    submitted = False
+    if request.method == "POST":
+        author = Cinema(total_cinema_halls = 0)
+        form = CinemaForm(request.POST,instance=author)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_cinema?submitted=True')
+    else:
+        form = CinemaForm
+        if 'submitted' in request.GET:
+            submitted=True
+    return render(request, 'ui/add_cinema.html', {'form': form , 'submitted':submitted})
+
+def edit_cinema(request, cinema_id):
+    cinema = Cinema.objects.get(pk = cinema_id)
+    form = CinemaForm(request.POST or None, instance = cinema)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/cinema_list')
+    return render(request, 'ui/edit_cinema.html', {'form': form, 'cinema': cinema })
 def add_booking(request):
     submitted = False
     if request.method == "POST":

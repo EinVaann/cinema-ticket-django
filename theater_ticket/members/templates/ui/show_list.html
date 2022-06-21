@@ -41,7 +41,9 @@
         <th>
             {{show.movie_id}} 
         </th>
-        <th><a href="" class="btn btn-primary" role="button">Edit</a></th>
+        <th>
+          <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_show' show.id %}">Edit</a></button>
+        </th>
     </tr>
       {% endfor %}
     </table>
