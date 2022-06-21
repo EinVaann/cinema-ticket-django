@@ -44,6 +44,9 @@
         <th>
           <a href="{% url 'edit_show' show.id %}" class="btn btn-primary" role="button">Edit</a>
         </th>
+        <th>
+          <a href="{% url 'delete_show' show.id %}" class="btn btn-primary" role="button">delete</a>
+        </th>
     </tr>
       {% endfor %}
     </table>

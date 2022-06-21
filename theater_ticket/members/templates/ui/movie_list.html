@@ -40,8 +40,12 @@
                       Info
                   </a>
                   {% if user.is_superuser %}
-                    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_movie' movie.id %}">
+                    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:black;"  href="{% url 'edit_movie' movie.id %}">
                         Edit
+                        </a>
+                    </button>
+                    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:black;"  href="{% url 'delete_movie' movie.id %}">
+                        Delete
                         </a>
                     </button>
                   {% endif %}

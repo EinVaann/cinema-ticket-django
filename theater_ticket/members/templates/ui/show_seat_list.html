@@ -41,7 +41,11 @@
             {{show_seat.booking_id}} 
         </th>
         <th>
-            <a href="{% url 'edit_show_seat' show_seat.id %}" class="btn btn-primary" role="button">Edit</a>        </th>
+            <a href="{% url 'edit_show_seat' show_seat.id %}" class="btn btn-primary" role="button">Edit</a>        
+        </th>
+        <th>
+          <a href="{% url 'delete_show_seat' show_seat.id %}" class="btn btn-primary" role="button">Delete</a>        
+        </th>
     </tr>
       {% endfor %}
     </table>

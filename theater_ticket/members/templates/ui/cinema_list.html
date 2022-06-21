@@ -25,9 +25,14 @@
     </label>
   </a>
   </th>
-  <th
+  <th>
   {% if user.is_superuser %}
-    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_cinema' cinema.id %}">Edit</a></button>
+    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:black;"  href="{% url 'edit_cinema' cinema.id %}">Edit</a></button>
+  {% endif %}        
+  </th>
+  <th>
+  {% if user.is_superuser %}
+  <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:black;"  href="{% url 'delete_cinema' cinema.id %}">Delete</a></button>
   {% endif %}        
   </th>
   </tr>

@@ -139,6 +139,11 @@ def edit_movie(request, movie_id):
     return render(request, 'ui/edit_movie.html', {'form': form, 'movie':movie })
 
 
+def delete_movie(request, movie_id):
+    movie = Movie.objects.get(pk =  movie_id).delete()
+    print(movie)
+    return HttpResponseRedirect('/movie_list')
+
 def add_show(request):
     submitted = False
     if request.method == "POST":
@@ -163,6 +168,10 @@ def edit_show(request, show_id):
         form.save()
         return HttpResponseRedirect('/show_list')
     return render(request, 'ui/edit_show.html', {'form1': form, 'show':show, 'movies':movies_dur })
+
+def delete_show(request, show_id):
+    show = Show.objects.get(pk =  show_id).delete()
+    return HttpResponseRedirect('/show_list')
     
 def add_cinema(request):
     submitted = False
@@ -185,6 +194,11 @@ def edit_cinema(request, cinema_id):
         form.save()
         return HttpResponseRedirect('/cinema_list')
     return render(request, 'ui/edit_cinema.html', {'form': form, 'cinema': cinema })
+
+def delete_cinema(request, cinema_id):
+    cinema = Cinema.objects.get(pk =  cinema_id).delete()
+    return HttpResponseRedirect('/cinema_list')
+
 def add_booking(request):
     submitted = False
     if request.method == "POST":
@@ -198,6 +212,9 @@ def add_booking(request):
             submitted=True
     return render(request, 'ui/add_booking.html', {'form1': form1 , 'submitted':submitted})
 
+def delete_booking(request, booking_id):
+    booking = Booking.objects.get(pk =  booking_id).delete()
+    return HttpResponseRedirect('/booking_list')
 
 def add_show_seat(request):
     submitted = False
@@ -212,6 +229,9 @@ def add_show_seat(request):
             submitted=True
     return render(request, 'ui/add_show_seat.html', {'form1': form1 , 'submitted':submitted})
 
+def delete_show_seat(request, show_seat_id):
+    show_seat = Show_Seat.objects.get(pk =  show_seat_id).delete()
+    return HttpResponseRedirect('/show_seat_list')
 
 def add_payment(request):
     submitted = False
@@ -226,6 +246,9 @@ def add_payment(request):
             submitted=True
     return render(request, 'ui/add_payment.html', {'form1': form1 , 'submitted':submitted})
 
+def delete_payment(request, payment_id):
+    payment = Payment.objects.get(pk =  payment_id).delete()
+    return HttpResponseRedirect('/payment_list')
 
 #edit
 
@@ -269,3 +292,4 @@ def get_movie_info(request, pk):
     print(show_lists)
 
     return render(request, 'ui/movie_info.html', {'movie':movie, 'shows':show_lists})
+

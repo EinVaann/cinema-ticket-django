@@ -45,7 +45,12 @@
           {% if user.is_superuser %}
           <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary" role="button">Edit</a>
           {% endif %}
-      </th>
+        </th>
+        <th>
+          {% if user.is_superuser %}
+          <a href="{% url 'delete_booking' booking.id %}" class="btn btn-primary" role="button">Delete</a>
+          {% endif %}
+        </th> 
     </tr>
       {% endfor %}
     </table>
