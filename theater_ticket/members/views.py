@@ -133,9 +133,10 @@ def add_show(request):
             return HttpResponseRedirect('/add_show?submitted=True')
     else:
         form1 = ShowForm
+        movies = Movie.objects.all()
         if 'submitted' in request.GET:
             submitted=True
-    return render(request, 'ui/add_show.html', {'form1': form1 , 'submitted':submitted})
+    return render(request, 'ui/add_show.html', {'form1': form1 , 'submitted':submitted, 'movies':movies})
 
 def add_booking(request):
     submitted = False
