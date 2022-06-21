@@ -1,0 +1,56 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+{% if form.errors %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}	
+	<div class="shadow p-4 mb-5 bg-body rounded">
+	<h2>Nội Dung Phim</h2>
+<br/>
+<div class="row">
+    <div class="col-4">
+        <figure class="figure">
+            <img src="/image/{{movie.image}}" class="figure-img img-fluid rounded" alt="..." width="300" height="500">
+        </figure>
+    </div>
+    <div class="col-6">
+        <h4>{{movie.title}}</h4>
+        <div>
+            <b>Thể loại: </b>{{movie.genre}}
+        </div>
+        <div>
+            <b>Thời lượng: </b>{{movie.duration}} phút
+        </div>
+        <div>
+            <b>Ngày ra mắt: </b>{{movie.released_date}}
+        </div>
+        <div>
+            <b>Tóm tắt: </b>
+            <p>{{movie.description}}</p>
+        </div>
+        
+    </div>
+</div>
+<div>
+    <h2><center><b>LỊCH CHIẾU</b></center></h2>
+    {% for key,value in shows.items%}
+    <div>
+        <h4>{{key}}</h4>
+    </div>
+        <div class="row">
+        {% for show in value %}
+        
+            <div class=".col-6 col-sm-3">
+                <button type="button" class="btn btn-dark">
+                    {{show.date}} - {{show.start_time}} to {{show.end_time}}
+                </button>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+<br/><br/>	
+{% endblock %}
