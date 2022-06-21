@@ -85,7 +85,7 @@ def home_page_view(request):
     if len(movies) > 10:
         movies = movies[:10]
     return render(request, 'ui/home.html', {'movies':movies})
-    
+
 def create_seats(request):
     cinema_halls = Cinema_Hall.objects.all()
     
@@ -189,7 +189,7 @@ def edit_booking(request, booking_id):
     return render(request, 'ui/edit_booking.html', {'form': form, 'show':booking})
 
 def edit_show_seat(request, show_seat_id):
-    show_seat = ShowSeat.objects.get(pk =  show_seat_id)
+    show_seat = Show_Seat.objects.get(pk =  show_seat_id)
     form = Show_SeatForm(request.POST or None, instance = show_seat)
     if form.is_valid():
         form.save()

@@ -14,6 +14,8 @@ class Movie(models.Model):
 class Cinema(models.Model):
     name = models.CharField(max_length=256)
     total_cinema_halls = models.IntegerField()
+    def __str__(self):
+        return self.name
 
 class Cinema_Hall(models.Model):
     name = models.CharField(max_length=64)
