@@ -277,5 +277,24 @@ def get_show_info(request,pk):
 
 def buy_ticket(request):
     seat_ids = request.GET.getlist('id')
-    print(seat_ids)
-    return redirect('/')
+    seats = [Show_Seat.objects.get(pk=i) for i in seat_ids]
+    total_amount = 0
+    for seat in seats:
+        total_amount += seat.price
+    booking = Booking(number_of_seats=len(seat_ids),timestamp=datetime.date.today(),
+                    amount=total_amount, user_id=request.user, show_id=seats[0].show_id)
+    booking.save()
+    for seat in seats:
+        seat.booking_id = booking
+        seat.is_empty = False
+        seat.save()
+    return render(request, 'ui/success_order.html' , {'seats':seats,'booking':booking, 'show':seats[0].show_id})
+
+def search_movie(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        movie_list = Movie.objects.filter(title__icontains = searched)
+        print(movie_list)
+        return render(request, 'ui/movie_list.html', {'movie_list':movie_list})
+    else:
+        return HttpResponseRedirect('/movie_list')

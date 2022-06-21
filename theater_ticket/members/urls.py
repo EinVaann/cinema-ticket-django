@@ -35,6 +35,7 @@ urlpatterns = [
     path('show_info/<str:pk>/', views.get_show_info, name='show_info'),
     path('buy_ticket/', views.buy_ticket, name='buy_ticket'),
     path('create_seats',views.create_seats),
+    path('search_movie', views.search_movie, name="search_movie"),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

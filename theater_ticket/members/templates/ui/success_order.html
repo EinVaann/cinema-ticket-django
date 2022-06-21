@@ -1,0 +1,12 @@
+{% extends 'ui/base.html' %}
+{% block  content %}
+<h2><center>Successfully</center></h2>
+<h4>Đã đặt thành công</h4>
+<b>Phim: </b>{{show}}<br>
+<b>Lúc: </b>{{show.date}}-{{show.start_time}}->{{show.end_time}}<br>
+{% for seat in seats %}
+<br><span>Ghế {{seat.cinema_seat_id}}</span>
+{% endfor %}
+<br><br>
+<span><b>Tổng cộng:</b> {{booking.amount}} đ </span>
+{% endblock %}
