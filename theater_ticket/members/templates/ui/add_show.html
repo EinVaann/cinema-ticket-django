@@ -10,7 +10,11 @@
 
         <form action="" method=POST>
              {% csrf_token %}  
-             {{form1.as_p}}  
+             {{form1.date}}<br>
+             {{form1.start_time}}<br>
+             {{form1.end_time}}<br>
+             {{form1.movie_id.label_tag}}{{form1.movie_id}}<br><br>
+             {{form1.cinema_hall_id.label_tag}}{{form1.cinema_hall_id}}<br><br>
              <input type ="submit" value="Submit" class="btn btn-secondary">
         </form>
         {%endif%}
