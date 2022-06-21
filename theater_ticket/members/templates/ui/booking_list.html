@@ -11,7 +11,7 @@
 	<div class="shadow p-4 mb-5 bg-body rounded">
 	<h1>Booking List</h1>
     <br/>
-        <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_booking' %}">Add</a></button>
+    <a href="{% url 'add_booking' %}" class="btn btn-primary" role="button">Add</a>
     <br/>    
 <br/>
 <div class="container">
@@ -43,7 +43,7 @@
         </th>
         <th>
           {% if user.is_superuser %}
-          <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_booking' booking.id %}">Edit</a></button>
+          <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary" role="button">Edit</a>
           {% endif %}
       </th>
     </tr>

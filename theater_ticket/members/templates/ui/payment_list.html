@@ -11,7 +11,7 @@
 	<div class="shadow p-4 mb-5 bg-body rounded">
 	<h1>Payment list</h1>
     <br/>
-        <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_payment' %}">Add</a></button>
+    <a href="{% url 'add_payment' %}" class="btn btn-primary" role="button">Add</a>
     <br/>    
 <br/>
 <div class="container">
@@ -39,7 +39,7 @@
         </th>
         <th>
             {% if user.is_superuser %}
-            <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_payment' payment.id %}">Edit</a></button>
+            <a href="{% url 'edit_payment' payment.id %}" class="btn btn-primary" role="button">Edit</a>
             {% endif %}
         </th>
     </tr>

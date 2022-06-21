@@ -7,7 +7,7 @@ from .models import  Cinema_Hall, Movie, Show, Booking, Show_Seat, Payment
 class MovieForm(ModelForm):
     class Meta:
         model = Movie
-        fields = ('title','description','duration','released_date','genre')
+        fields = '__all__'
         labels = {
             'title' : '',
             'description' : '',

@@ -9,9 +9,9 @@
 {% endif %}	
 	<div class="shadow p-4 mb-5 bg-body rounded">
 	<h1>Movie List</h1>
-    <br/>
+    <br/> 
     {% if user.is_superuser %}
-        <a href="{% url 'add_movie' %}" class="btn btn-primary btn-lg   " role="button">Add</a>
+        <a href="{% url 'add_movie' %}" class="btn btn-primary btn-lg" role="button">Add</a>
     {% endif %}
    
 <br>
