@@ -1,5 +1,5 @@
 from os import device_encoding
-from tkinter import N
+from tkinter import N 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -80,6 +80,12 @@ def get_all_movies(request):
     movie_list = Movie.objects.all()
     return render(request, 'ui/movie_list.html', {'movie_list':movie_list})
 
+def home_page_view(request):
+    movies = Movie.objects.all()
+    if len(movies) > 10:
+        movies = movies[:10]
+    return render(request, 'ui/home.html', {'movies':movies})
+    
 def create_seats(request):
     cinema_halls = Cinema_Hall.objects.all()
     

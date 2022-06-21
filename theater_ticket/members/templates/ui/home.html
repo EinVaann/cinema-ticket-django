@@ -1,8 +1,44 @@
 {% extends 'ui/base.html' %}
+{% load static %}
 
 {% block content %}
-	
+<link href="{% static 'css/main.css'%}" rel="stylesheet" />
 <h1> HOME PAGE</h1>
-
-<br/><br/>	
+<div class="container text-center my-3">
+    <h2 class="font-weight-light">Movies</h2>
+    <div class="row mx-auto my-auto justify-content-center">
+        <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="/image/{{movies.0.image}}" class="img-fluid">
+                                {{ movies.pop.0 }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for movie in movies %}
+                <div class="carousel-item">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="/image/{{movie.image}}" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+           
+        </div>
+        <a class="carousel-control-prev w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next w-aut" href="#recipeCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

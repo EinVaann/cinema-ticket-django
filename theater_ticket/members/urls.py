@@ -1,8 +1,10 @@
+from django.conf import settings
 from django.urls import path
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path("", views.home_page, name= 'home'),
+    path("", views.home_page_view, name= 'home'),
     path('login_user', views.login_user, name='login'),
     path('logout_user', views.logout_user, name='logout'),
     path('register', views.register_user, name='register'),
@@ -26,3 +28,6 @@ urlpatterns = [
     path('edit_show_seat/<show_seat_id>',views.edit_show_seat, name='edit_show_seat'),
     path('edit_payment/<payment_id>',views.edit_payment, name='edit_payment'),
 ]
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
