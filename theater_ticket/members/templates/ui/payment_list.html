@@ -1,0 +1,56 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+{% if form.errors %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-th="Close"></button>
+  </div>
+{% endif %}	
+{% if user.is_superuser %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+	<h1>Payment list</h1>
+    <br/>
+        <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_payment' %}">Add</a></button>
+    <br/>    
+<br/>
+<div class="container">
+  <div class="row">
+    <table>
+    <tr>
+        <td>Amount</td>
+        <td>Timestamp</td>
+        <td>Payment method</td>
+        <td>Booking id</td>
+    </tr>
+      {% for payment in payment_list %}
+    <tr>
+        <th>
+          {{payment.amount}} 
+        </th>
+        <th>
+            {{payment.timestamp}} 
+        </th>
+        <th>
+            {{payment.payment_method}}  
+        </th>
+        <th>
+            {{payment.booking_id}} 
+        </th>
+        <th>
+            {% if user.is_superuser %}
+            <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_payment' payment.id %}">Edit</a></button>
+            {% endif %}
+        </th>
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br/><br/>
+{%else%}
+<center>
+    <h1>Sorry you don't have permission to access this page</h1>
+    </center>
+{% endif %}	
+{% endblock %}

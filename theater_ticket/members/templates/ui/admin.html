@@ -28,16 +28,16 @@
         <a>User</a>
     </li>
     <li>
-        <a>Payment</a>
+        <a  href="{% url 'payment_list' %}">Payment</a>
     </li>
     <li>
-        <a>Booking</a>
+        <a  href="{% url 'booking_list' %}">Booking</a>
     </li>
     <li>
         <a  href="{% url 'show_list' %}" >Show</a>
     </li>
     <li>
-        <a>Show sheat</a>
+        <a  href="{% url 'show_seat_list' %}" >Show sheat</a>
     </li>
 
 {% else %}

@@ -1,0 +1,60 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+{% if form.errors %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-th="Close"></button>
+  </div>
+{% endif %}	
+{% if user.is_superuser %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+	<h1>Show seat list</h1>
+    <br/>
+        <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_show_seat' %}">Add</a></button>
+    <br/>    
+<br/>
+<div class="container">
+  <div class="row">
+    <table>
+    <tr>
+        <td>Is Empty</td>
+        <td>Price</td>
+        <td>Cinema Seat id</td>
+        <td>Show id</td>
+        <td>Booking id</td>
+    </tr>
+      {% for show_seat in show_seat_list %}
+    <tr>
+        <th>
+          {{show_seat.is_empty}} 
+        </th>
+        <th>
+            {{show_seat.price}} 
+        </th>
+        <th>
+            {{show_seat.cinema_seat_id}}  
+        </th>
+        <th>
+            {{show_seat.show_id}} 
+        </th>
+        <th>
+            {{show_seat.booking_id}} 
+        </th>
+        <th>
+            {% if user.is_superuser %}
+            <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_show_seat' show_seat.id %}">Edit</a></button>
+            {% endif %}
+        </th>
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br/><br/>
+{%else%}
+<center>
+    <h1>Sorry you don't have permission to access this page</h1>
+    </center>
+{% endif %}	
+{% endblock %}

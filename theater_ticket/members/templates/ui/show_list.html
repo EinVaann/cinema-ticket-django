@@ -41,11 +41,7 @@
         <th>
             {{show.movie_id}} 
         </th>
-        <th>
-            {% if user.is_superuser %}
-            <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'edit_show' show.id %}">Edit</a></button>
-            {% endif %}
-        </th>
+        <th><button>Edit</button></th>
     </tr>
       {% endfor %}
     </table>
