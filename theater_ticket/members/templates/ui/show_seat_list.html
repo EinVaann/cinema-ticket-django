@@ -17,35 +17,35 @@
   <div class="row">
     <table>
     <tr>
-        <td>Is Empty</td>
-        <td>Price</td>
-        <td>Cinema Seat id</td>
-        <td>Show</td>
-        <td>Booking</td>
+        <th>Is Empty</th>
+        <th>Price</th>
+        <th>Cinema Seat id</th>
+        <th>Show</th>
+        <th>Booking</th>
     </tr>
       {% for show_seat in show_seat_list %}
     <tr>
-        <th>
+        <td>
           {{show_seat.is_empty}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{show_seat.price}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{show_seat.cinema_seat_id}}  
-        </th>
-        <th>
+        </td>
+        <td>
             {{show_seat.show_id}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{show_seat.booking_id}} 
-        </th>
-        <th>
+        </td>
+        <td>
             <a href="{% url 'edit_show_seat' show_seat.id %}" class="btn btn-primary" role="button">Edit</a>        
-        </th>
-        <th>
+        </td>
+        <td>
           <a href="{% url 'delete_show_seat' show_seat.id %}" class="btn btn-primary" role="button">Delete</a>        
-        </th>
+        </td>
     </tr>
       {% endfor %}
     </table>

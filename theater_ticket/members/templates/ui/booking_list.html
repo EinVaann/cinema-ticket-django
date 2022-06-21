@@ -18,35 +18,35 @@
   <div class="row">
     <table>
     <tr>
-        <td>Number of seats</td>
-        <td>Timestamp</td>
-        <td>Status</td>
-        <td>User id</td>
-        <td>Show id</td>
+        <th>Number of seats</th>
+        <th>Timestamp</th>
+        <th>Status</th>
+        <th>User id</th>
+        <th>Show id</th>
     </tr>
       {% for booking in booking_list %}
     <tr>
-        <th>
+        <td>
           {{booking.number_of_seats}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{booking.timestamp}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{booking.amount}}  
-        </th>
-        <th>
+        </td>
+        <td>
             {{booking.user_id}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{booking.show_id}} 
-        </th>
-        <th>
+        </td>
+        <td>
           <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary" role="button">Edit</a>
-        </th>
-        <th>
+        </td>
+        <td>
           <a href="{% url 'delete_booking' booking.id %}" class="btn btn-primary" role="button">Delete</a>
-        </th> 
+        </td> 
     </tr>
       {% endfor %}
     </table>

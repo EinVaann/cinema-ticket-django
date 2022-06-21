@@ -18,35 +18,35 @@
   <div class="row">
     <table>
     <tr>
-        <td>Date</td>
-        <td>Start time</td>
-        <td>End time</td>
-        <td>Cinema hall</td>
-        <td>Movie</td>
+        <th>Date</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Cinema hall</th>
+        <th>Movie</th>
     </tr>
       {% for show in show_list %}
     <tr>
-        <th>
+        <td>
           {{show.date}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{show.start_time}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{show.end_time}}  
-        </th>
-        <th>
+        </td>
+        <td>
             {{show.cinema_hall_id}} 
-        </th>
-        <th>
+        </td>
+        <td>
             {{show.movie_id}} 
-        </th>
-        <th>
+        </td>
+        <td>
           <a href="{% url 'edit_show' show.id %}" class="btn btn-primary" role="button">Edit</a>
-        </th>
-        <th>
+        </td>
+        <td>
           <a href="{% url 'delete_show' show.id %}" class="btn btn-primary" role="button">delete</a>
-        </th>
+        </td>
     </tr>
       {% endfor %}
     </table>
