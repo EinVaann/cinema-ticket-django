@@ -21,7 +21,9 @@
       {% for movie in movie_list %}
       <div class="col-xs-6 col-sm-3">
           <div class="card">
+            <a href="{% url 'movie_info' movie.id %}">
               <img class="card-img-top" src="/image/{{movie.image}}" alt="{{movie.title}}">
+            </a>
               <div class="card-body">
                   <h5 class="card-title">{{movie.title}}</h5>
                   <p class="card-text" style="
@@ -36,18 +38,16 @@
                       {{movie.description}}
                   </p>
 
-                  <a href="#" class="btn btn-outline-primary btn-sm">
+                  <a href="{% url 'movie_info' movie.id %}" class="btn btn-outline-primary btn-sm">
                       Info
                   </a>
                   {% if user.is_superuser %}
-                    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:black;"  href="{% url 'edit_movie' movie.id %}">
-                        Edit
-                        </a>
-                    </button>
-                    <button type="button" class="btn btn-primary"><a style="text-decoration: none; color:black;"  href="{% url 'delete_movie' movie.id %}">
+                  <a href="{% url 'edit_movie' movie.id %}" class="btn btn-outline-primary btn-sm">
+                    Edit
+                    </a>
+                    <a href="{% url 'delete_movie' movie.id %}" class="btn btn-outline-primary btn-sm">
                         Delete
                         </a>
-                    </button>
                   {% endif %}
               </div>
           </div>

@@ -3,32 +3,10 @@
 {% if user.is_superuser %}
     {% comment %} <center>
         <h1> Admin page </h1>
-        <br/><br/>
-        <table>
-        <tr>
-        <th>User</th>
-        <th><button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_movie' %}">Add</a></button></th>
-        <th><button type="button" class="btn btn-warning"><a style="text-decoration: none" href="{% url 'add_movie' %}">Edit</a></button></th>
-        </tr>
-        <th>Boking</th>
-        <th><button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_movie' %}">Add</a></button></th>
-        <th><button type="button" class="btn btn-warning"><a style="text-decoration: none" href="{% url 'add_movie' %}">Edit</a></button></th>
-        </tr>
-        <th>Payment</th>
-        <th><button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_movie' %}">Add</a></button></th>
-        <th><button type="button" class="btn btn-warning"><a style="text-decoration: none" href="{% url 'add_movie' %}">Edit</a></button></th>
-        </tr>
-        <th>Show</th>
-        <th><button type="button" class="btn btn-primary"><a style="text-decoration: none; color:red;"  href="{% url 'add_movie' %}">Add</a></button></th>
-        <th><button type="button" class="btn btn-warning"><a style="text-decoration: none" href="{% url 'add_movie' %}">Edit</a></button></th>
-        </tr>
-        </table>  
+        <br/><br/> 
     </center> {% endcomment %}
     <li>
         <a>User</a>
-    </li>
-    <li>
-        <a  href="{% url 'payment_list' %}">Payment</a>
     </li>
     <li>
         <a  href="{% url 'booking_list' %}">Booking</a>
@@ -37,7 +15,7 @@
         <a  href="{% url 'show_list' %}" >Show</a>
     </li>
     <li>
-        <a  href="{% url 'show_seat_list' %}" >Show sheat</a>
+        <a  href="{% url 'show_seat_list' %}" >Show seat</a>
     </li>
 
 {% else %}

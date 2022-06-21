@@ -33,7 +33,7 @@
             {{booking.timestamp}} 
         </th>
         <th>
-            {{booking.status}}  
+            {{booking.amount}}  
         </th>
         <th>
             {{booking.user_id}} 
@@ -42,14 +42,10 @@
             {{booking.show_id}} 
         </th>
         <th>
-          {% if user.is_superuser %}
           <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary" role="button">Edit</a>
-          {% endif %}
         </th>
         <th>
-          {% if user.is_superuser %}
           <a href="{% url 'delete_booking' booking.id %}" class="btn btn-primary" role="button">Delete</a>
-          {% endif %}
         </th> 
     </tr>
       {% endfor %}

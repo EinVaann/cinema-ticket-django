@@ -1,7 +1,7 @@
 from email.policy import default
 from django import forms
 from django.forms import ModelForm,ModelChoiceField
-from .models import  Cinema, Cinema_Hall, Movie, Show, Booking, Show_Seat, Payment
+from .models import  Cinema, Cinema_Hall, Movie, Show, Booking, Show_Seat
 
 
 class MovieForm(ModelForm):
@@ -53,8 +53,8 @@ class ShowForm(ModelForm):
         }
         widgets = {
             'date' : forms.DateInput(attrs={'class':'form-control', 'placeholder':'Date'}),
-            'start_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'Start Time'}),
-            'end_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'End Time'}),
+            'start_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'Start Time HH:MM'}),
+            'end_time' : forms.TimeInput(attrs={'class':'form-control', 'placeholder':'End Time HH:MM', 'readonly':True }),
         }
         
 class BookingForm(ModelForm):
@@ -66,14 +66,14 @@ class BookingForm(ModelForm):
         labels = {
             'number_of_seats':'',
             'timestamp':'',
-            'status':'',
+            'amount':'',
             'user_id':'User',
             'show_id':'Show'
         }
         widgets = {
             'number_of_seats' : forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Number of Seats'}),
-            'timestamp' : forms.DateTimeInput(attrs={'class':'form-control', 'placeholder':'Timestamp'}),
-            'status' : forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Status'}),
+            'timestamp' : forms.DateTimeInput(attrs={'class':'form-control', 'placeholder':'Timestamp YYYY-MM-DD'}),
+            'amount' : forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Amount'}),
         }
         
 class Show_SeatForm(ModelForm):
@@ -88,23 +88,6 @@ class Show_SeatForm(ModelForm):
         }
         widgets = {
             'price' : forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Price'}),
-        }
-
-class PaymentForm(ModelForm):
-    class Meta:
-        model = Payment
-        fields = '__all__'
-
-        labels = {
-            'amount' : '',
-            'timestamp': '',
-            'payment_method':'',
-            'booking_id':'Booking_ID'
-        }
-        widgets = {
-            'amount' : forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Amount'}),
-            'timestamp' : forms.DateTimeInput(attrs={'class':'form-control', 'placeholder':'Timestamp'}),
-            'payment_method' : forms.TextInput(attrs={'class':'form-control', 'placeholder':'Payment Method'}),
         }
 
 class CinemaForm(ModelForm):

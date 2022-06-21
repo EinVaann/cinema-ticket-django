@@ -14,7 +14,6 @@ urlpatterns = [
     path('show_list', views.get_all_show, name='show_list'),
     path('booking_list', views.get_all_booking, name='booking_list'),
     path('show_seat_list', views.get_all_show_seat, name='show_seat_list'),
-    path('payment_list', views.get_all_payment, name='payment_list'),
     path('add_movie',views.add_movie, name='add_movie'),
     path('edit_movie/<movie_id>',views.edit_movie, name='edit_movie'),
     path('delete_movie/<movie_id>',views.delete_movie, name='delete_movie'),
@@ -27,15 +26,15 @@ urlpatterns = [
     path('delete_cinema/<cinema_id>',views.edit_cinema, name='edit_cinema'),
     path('add_booking',views.add_booking, name='add_booking'),
     path('add_show_seat',views.add_show_seat, name='add_show_seat'),
-    path('add_payment',views.add_payment, name='add_payment'),
     path('edit_booking/<booking_id>',views.edit_booking, name='edit_booking'),
     path('delete_booking/<booking_id>',views.delete_booking, name='delete_booking'),
 
     path('edit_show_seat/<show_seat_id>',views.edit_show_seat, name='edit_show_seat'),
     path('delete_show_seat/<show_seat_id>',views.delete_show_seat, name='delete_show_seat'),
-    path('edit_payment/<payment_id>',views.edit_payment, name='edit_payment'),
-    path('delete_payment/<payment_id>',views.delete_payment, name='delete_payment'),  
     path('movie_info/<str:pk>/', views.get_movie_info, name='movie_info'),
+    path('show_info/<str:pk>/', views.get_show_info, name='show_info'),
+    path('buy_ticket/', views.buy_ticket, name='buy_ticket'),
+    path('create_seats',views.create_seats),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

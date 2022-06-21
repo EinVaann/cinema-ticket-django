@@ -1,0 +1,58 @@
+{% extends 'ui/base.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/show_info.css'%}" rel="stylesheet" />
+{% if form.errors %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}	
+	<div class="shadow p-4 mb-5 bg-body rounded">
+	<h2>Sơ đồ rạp</h2>
+    <br/>
+    <div class="movie-container">
+    <h5>{{show}}</h5>
+    
+    <ul class="showcase">
+      <li>
+        <div class="seat"></div>
+        <small>N/A</small>
+      </li>
+      <li>
+        <div class="seat selected"></div>
+        <small>Selected</small>
+      </li>
+      <li>
+        <div class="seat occupied"></div>
+        <small>Occupied</small>
+      </li>    
+    </ul>
+    
+    <div class="container">
+      <div class="screen"></div>
+      {% for seat in seat_list%}
+      {% if forloop.counter0|divisibleby:8 %}
+        {% if forloop.counter0 > 0 %}
+             </div>
+        {% endif %}
+        <div class="row">
+        
+      {% endif %}
+      {% if seat.is_empty %}
+            <div class="seat" id="{{seat.id}}" title="{{seat.price}}"></div>
+        {% else %}
+            <div class="seat occupied" id="{{seat.id}}" title="{{seat.price}}"></div>
+        {% endif %}
+      {% endfor %}
+      </div>
+      
+      <p class="text">
+        Đã chọn <span id="count">0</span> ghế. Tổng tiền là: <span id="total">0</span> đồng.
+      </p>
+      <button onclick="buyTicket();" class="btn btn-dark">Mua</button>
+    </div>
+  </div>
+<br/><br/>	
+<script src="{% static 'js/show_info.js' %}"></script>
+{% endblock %}

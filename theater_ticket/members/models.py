@@ -42,7 +42,7 @@ class Show(models.Model):
 class Booking(models.Model):
     number_of_seats = models.IntegerField()
     timestamp = models.DateTimeField()
-    status = models.IntegerField()
+    amount = models.IntegerField()
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     show_id = models.ForeignKey(Show, on_delete=models.CASCADE)
     def __str__(self):
@@ -54,9 +54,3 @@ class Show_Seat(models.Model):
     cinema_seat_id = models.ForeignKey(Cinema_Seat, on_delete=models.CASCADE)
     show_id = models.ForeignKey(Show, on_delete=models.CASCADE)
     booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE,null=True,blank=True)
-
-class Payment(models.Model):
-    amount = models.IntegerField()
-    timestamp = models.DateTimeField()
-    payment_method = models.CharField(max_length=100)
-    booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE)

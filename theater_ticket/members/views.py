@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
-from .forms import CinemaForm, MovieForm, ShowForm , BookingForm ,Show_SeatForm, PaymentForm
+from .forms import CinemaForm, MovieForm, ShowForm , BookingForm ,Show_SeatForm
 from django.http import HttpResponseRedirect
 
 def home_page(request):
@@ -72,10 +72,6 @@ def get_all_booking(request):
 def get_all_show_seat(request):
     show_seat_list = Show_Seat.objects.all()
     return render(request, 'ui/show_seat_list.html', {'show_seat_list':show_seat_list}) 
-
-def get_all_payment(request):
-    payment_list = Payment.objects.all()
-    return render(request, 'ui/payment_list.html', {'payment_list':payment_list}) 
     
 def get_all_movies(request):
     movie_list = Movie.objects.all()
@@ -88,22 +84,17 @@ def home_page_view(request):
     return render(request, 'ui/home.html', {'movies':movies})
 
 def create_seats(request):
+    seats = Cinema_Seat.objects.all()
+    seats.delete()
     cinema_halls = Cinema_Hall.objects.all()
-    
-    c = 'ABCDEFGHJK'
-    n = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+    c = 'ABCDEF'
+    n = {1,2,3,4,5,6,7,8}
     for cinema_hall in cinema_halls:
-        d = 0
         for cc in c:
             for nn in n:
-                if cc!='K' and nn>11:
-                    continue
                 seat_name = cc + str(nn)
-                # print(seat_name)
-                # d+=1
                 seat = Cinema_Seat(seat_name=seat_name, cinema_hall_id=cinema_hall)
                 seat.save()
-        # print(d)
     return redirect('/')
 
 def delete_seats(request):
@@ -150,6 +141,18 @@ def add_show(request):
         form1 = ShowForm(request.POST)
         if form1.is_valid():
             form1.save()
+            hall_id = form1['cinema_hall_id'].value()
+            date = form1['date'].value()
+            start_time = form1['start_time'].value()
+            end_time = form1['end_time'].value()
+            movie_id = form1['movie_id'].value()
+            this_show = Show.objects.get(cinema_hall_id=hall_id,date=date,start_time=start_time,
+                        end_time=end_time,movie_id=movie_id)
+
+            seats = Cinema_Seat.objects.filter(cinema_hall_id=hall_id)
+            for seat in seats:
+                s = Show_Seat(is_empty=True,price=70000,cinema_seat_id=seat,show_id=this_show)
+                s.save()
             return HttpResponseRedirect('/add_show?submitted=True')
     else:
         form1 = ShowForm
@@ -232,24 +235,6 @@ def add_show_seat(request):
 def delete_show_seat(request, show_seat_id):
     show_seat = Show_Seat.objects.get(pk =  show_seat_id).delete()
     return HttpResponseRedirect('/show_seat_list')
-
-def add_payment(request):
-    submitted = False
-    if request.method == "POST":
-        form1 = PaymentForm(request.POST)
-        if form1.is_valid():
-            form1.save()
-            return HttpResponseRedirect('/add_payment?submitted=True')
-    else:
-        form1 = PaymentForm
-        if 'submitted' in request.GET:
-            submitted=True
-    return render(request, 'ui/add_payment.html', {'form1': form1 , 'submitted':submitted})
-
-def delete_payment(request, payment_id):
-    payment = Payment.objects.get(pk =  payment_id).delete()
-    return HttpResponseRedirect('/payment_list')
-
 #edit
 
 def edit_booking(request, booking_id):
@@ -268,14 +253,6 @@ def edit_show_seat(request, show_seat_id):
         return HttpResponseRedirect('/show_seat_list')
     return render(request, 'ui/edit_show_seat.html', {'form': form, 'show':show_seat})
 
-def edit_payment(request, payment_id):
-    payment = Payment.objects.get(pk =  payment_id)
-    form = PaymentForm(request.POST or None, instance = payment)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/payment_list')
-    return render(request, 'ui/edit_payment.html', {'form': form, 'show':payment})
-
 
 def get_movie_info(request, pk):
     # print("?")
@@ -293,3 +270,12 @@ def get_movie_info(request, pk):
 
     return render(request, 'ui/movie_info.html', {'movie':movie, 'shows':show_lists})
 
+def get_show_info(request,pk):
+    show = Show.objects.get(pk=pk)
+    seat_list = Show_Seat.objects.filter(show_id=pk)
+    return render(request, 'ui/show_info.html', {'show':show,'seat_list':seat_list})
+
+def buy_ticket(request):
+    seat_ids = request.GET.getlist('id')
+    print(seat_ids)
+    return redirect('/')

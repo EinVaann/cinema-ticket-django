@@ -37,20 +37,21 @@
 <div>
     <h2><center><b>LỊCH CHIẾU</b></center></h2>
     {% for key,value in shows.items%}
+        {% if value %}
     <div>
         <h4>{{key}}</h4>
     </div>
         <div class="row">
         {% for show in value %}
-        
             <div class=".col-6 col-sm-3">
-                <button type="button" class="btn btn-dark">
+                <a href="{% url 'show_info' show.id %}" role="button" class="btn btn-dark">
                     {{show.date}} - {{show.start_time}} to {{show.end_time}}
-                </button>
+                </a>
             </div>
         {% endfor %}
         </div>
+        {% endif %}
     {% endfor %}
-</div>
+</div>	
 <br/><br/>	
 {% endblock %}
